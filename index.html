@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Muskan Shrivastava — Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Muskan Shrivastava — Full Stack Developer (1 year freelancing). Open for internships." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark">
+  <header class="topbar">
+    <a class="logo" href="#home">Muskan Shrivastava</a>
+    <nav class="nav">
+      <a href="#home" data-target="home">Home</a>
+      <a href="#about" data-target="about">About</a>
+      <a href="#skills" data-target="skills">Skills</a>
+      <a href="#projects" data-target="projects">Projects</a>
+      <a href="#experience" data-target="experience">Experience</a>
+      <a href="#contact" data-target="contact">Contact</a>
+      <button id="themeToggle" class="btn icon-btn" aria-label="Toggle theme">🌗</button>
+    </nav>
+  </header>
+
+  <!-- main container with scroll-snap -->
+  <main id="mainSnap" class="snap-container">
+
+    <!-- HOME (first page) -->
+    <section id="home" class="page page-hero">
+      <div class="hero-center">
+        <h1 class="hero-catch">Crafting beautiful web experiences — <span class="typed">Fast. Accessible. Scalable.</span></h1>
+        <p class="hero-sub">I’m Muskan Shrivastava — Full Stack Developer • Freelance • Open for internships</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn primary">Hire Me</a>
+          <a href="#about" class="btn ghost">About</a>
+        </div>
+      </div>
+      <div class="hero-bg-orb" aria-hidden="true"></div>
+    </section>
+
+    <!-- ABOUT (second page) -->
+    <section id="about" class="page page-about container">
+      <div class="about-grid">
+        <div class="about-left">
+          <h2>About Me</h2>
+          <p>I’m a Full Stack Developer with 1 year of freelancing experience. I enjoy building performant frontends and scalable backends and I'm actively seeking internship opportunities to learn and contribute within a team. I specialize in React, Node.js, and modern UI/UX.</p>
+
+          <ul class="about-list">
+            <li><strong>Experience:</strong> 1 year — Freelance projects</li>
+            <li><strong>Availability:</strong> Open for internships & freelancing</li>
+            <li><strong>Location:</strong> (Your city) — Remote friendly</li>
+          </ul>
+
+          <div class="about-actions">
+            <a class="btn outline" href="/resume.pdf" download>Download Resume</a>
+            <a class="btn ghost" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="about-right">
+         <div class="oval-photo">
+  <img
+    src="photo/Muskan-Microsoft-Image-480.jpg"
+    srcset="photo/Muskan-Microsoft-Image-320.jpg 320w,
+            photo/Muskan-Microsoft-Image-480.jpg 480w,
+            photo/Muskan-Microsoft-Image-800.jpg 800w"
+    sizes="(max-width: 768px) 280px, 360px"
+    alt="Muskan Shrivastava — portrait"
+    loading="lazy"
+  />
+</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="page container">
+      <h2>Skills</h2>
+      <p class="muted">Card-style skill set grouped by category.</p>
+      <div class="skills-grid">
+        <article class="skill-card card" data-category="frontend">
+          <div class="card-head">
+            <h3>Frontend</h3><small>UI & UX</small>
+          </div>
+          <ul class="skill-list">
+            <li>React</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Tailwind</li>
+          </ul>
+        </article>
+
+        <article class="skill-card card" data-category="backend">
+          <div class="card-head">
+            <h3>Backend</h3><small>Server & APIs</small>
+          </div>
+          <ul class="skill-list">
+            <li>Node.js</li><li>Express.js</li>
+          </ul>
+        </article>
+
+        <article class="skill-card card" data-category="database">
+          <div class="card-head">
+            <h3>Database</h3><small>Storage</small>
+          </div>
+          <ul class="skill-list">
+            <li>MongoDB</li><li>SQL</li>
+          </ul>
+        </article>
+
+        <article class="skill-card card" data-category="tools">
+          <div class="card-head">
+            <h3>Tools / Other</h3><small>Workflow</small>
+          </div>
+          <ul class="skill-list">
+            <li>Git</li><li>GitHub</li><li>VS Code</li><li>Postman</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="page container">
+      <div class="section-head">
+        <div>
+          <h2>Projects</h2>
+          <p class="muted">Highlighted projects — click to view repo or live demo.</p>
+        </div>
+        <div class="filters">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="frontend">Frontend</button>
+          <button class="chip" data-filter="backend">Backend</button>
+          <button class="chip" data-filter="fullstack">Full Stack</button>
+        </div>
+      </div>
+
+      <div id="projectsGrid" class="projects-grid">
+        <article class="project-card card" data-type="fullstack">
+          <div class="project-media placeholder">Screenshot</div>
+          <div class="project-body">
+            <h3>Project One</h3>
+            <p class="muted">A full stack task manager app with authentication and real-time updates.</p>
+            <div class="project-tags"><span>React</span><span>Node</span><span>MongoDB</span></div>
+            <div class="project-actions"><a href="#" class="btn small">Live</a><a href="#" class="btn small ghost">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card card" data-type="frontend">
+          <div class="project-media placeholder">Screenshot</div>
+          <div class="project-body">
+            <h3>Project Two</h3>
+            <p class="muted">Interactive UI library and design system for dashboards.</p>
+            <div class="project-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+            <div class="project-actions"><a href="#" class="btn small">Live</a><a href="#" class="btn small ghost">GitHub</a></div>
+          </div>
+        </article>
+
+        <article class="project-card card" data-type="backend">
+          <div class="project-media placeholder">Screenshot</div>
+          <div class="project-body">
+            <h3>Project Three</h3>
+            <p class="muted">REST API for an e-commerce prototype with secure payment integration stub.</p>
+            <div class="project-tags"><span>Node</span><span>Express</span><span>Postgres</span></div>
+            <div class="project-actions"><a href="#" class="btn small">Docs</a><a href="#" class="btn small ghost">GitHub</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="page container">
+      <h2>Experience</h2>
+      <div class="experience-list">
+        <div class="exp-item card">
+          <h3>Freelance Web Developer</h3>
+          <p class="muted">Self-employed — Various clients</p>
+          <p>Worked on multiple full stack projects including dashboards, small SAAS prototypes, landing pages and APIs. Hands-on experience across React, Node.js, and MongoDB. Total experience: <strong>1 year</strong>.</p>
+        </div>
+
+        <div class="exp-item card">
+          <h3>Internship — (Placeholder)</h3>
+          <p class="muted">Open for internships — ready to add more real-world team experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="page container">
+      <h2>Contact Me</h2>
+      <div class="contact-grid">
+        <form id="contactForm" class="contact-card card">
+          <h3>Send a message</h3>
+          <label><span>Name</span><input type="text" name="name" required placeholder="Your name" /></label>
+          <label><span>Email</span><input type="email" name="email" required placeholder="you@example.com" /></label>
+          <label><span>Message</span><textarea name="message" rows="5" required placeholder="Brief message..."></textarea></label>
+          <div class="form-actions"><button type="submit" class="btn primary">Send</button><button type="reset" class="btn ghost">Reset</button></div>
+          <p class="muted small">Or reach me on <a href="#" aria-label="GitHub">GitHub</a> • <a href="#" aria-label="LinkedIn">LinkedIn</a>.</p>
+        </form>
+
+        <aside class="contact-info card">
+          <h3>Get in touch</h3>
+          <p>Email: <a href="mailto:muskan@example.com">muskan@example.com</a></p>
+          <p>Open to remote internships, freelance projects, and collaborations.</p>
+          <div class="contact-quick"><a class="btn outline" href="/resume.pdf" download>Download Resume</a></div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Muskan Shrivastava — Built with ❤️</p>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

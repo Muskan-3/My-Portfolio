@@ -116,7 +116,11 @@
 <section id="about" class="page page-about container">
   <div class="about-grid">
     <div class="about-left">
-      <h2>About Me</h2>
+      
+     <h2 class="section-heading">
+      About Me
+      <span class="section-underline" aria-hidden="true"></span>
+     </h2>
 
       <p class="lead">
         I’m <strong>Muskan Shrivastava</strong>, a web developer currently pursuing a
@@ -173,7 +177,11 @@
       
 <section id="skills" class="page skills-section">
   <div class="container">
-    <h2 class="skills-title">Skills & Technologies</h2>
+   <h1 class="section-heading">
+      Skills And Technology
+      <span class="section-underline" aria-hidden="true"></span>
+     </h1>
+
 
     <div class="skills-grid">
       <!-- Skill Card -->
@@ -223,7 +231,11 @@
   <div class="container">
     <div class="section-head">
       <div>
-        <h2 id="projects-heading">Featured Projects</h2>
+       <h1 class="section-heading">
+          featured Projects
+      <span class="section-underline" aria-hidden="true"></span>
+     </h1>
+
         <p class="muted">Highlighted projects — click to view repo or live demo.</p>
       </div>
     </div>
@@ -336,19 +348,22 @@
 
 
     <!-- EXPERIENCE -->
-    <section class="experience-section">
-    <h2 class="section-title">Experience</h2>
+    <section id="experience" class="experience-section">
+     <h1 class="section-heading">
+       Experience
+      <span class="section-underline" aria-hidden="true"></span>
+     </h1>
     <p class="section-subtitle">My professional journey</p>
     
     <div class="timeline">
-      <!-- Senior Full Stack Developer -->
+      <!-- Frontend Developer -->
       <div class="timeline-item">
         <div class="timeline-icon"></div>
         <div class="timeline-content">
-          <h3 class="role">Senior Full Stack Developer</h3>
-          <p class="company">Tech Innovation Labs</p>
-          <p class="description">Leading development of enterprise applications, mentoring junior developers, and architecting scalable solutions</p>
-          <span class="date">2022 - Present</span>
+          <h3 class="role">Frontend Developer</h3>
+          <p class="company">Creative Web Studio</p>
+          <p class="description">Developed pixel-perfect UI components, collaborated with designers, and improved site performance</p>
+          <span class="date">2023 - 2024</span>
         </div>
       </div>
 
@@ -358,21 +373,24 @@
         <div class="timeline-content">
           <h3 class="role">Full Stack Developer</h3>
           <p class="company">Digital Solutions Inc</p>
-          <p class="description">Built responsive web applications, implemented RESTful APIs, and optimized database performance</p>
-          <span class="date">2020 - 2022</span>
+          <p class="description">Built responsive web applications, implemented RESTful APIs, and optimized database performance.</p>
+          <span class="date">2024 - 2025</span>
         </div>
       </div>
 
-      <!-- Frontend Developer -->
-      <div class="timeline-item">
-        <div class="timeline-icon"></div>
-        <div class="timeline-content">
-          <h3 class="role">Frontend Developer</h3>
-          <p class="company">Creative Web Studio</p>
-          <p class="description">Developed pixel-perfect UI components, collaborated with designers, and improved site performance</p>
-          <span class="date">2019 - 2020</span>
-        </div>
+       <!-- Freelance Developer -->
+    <div class="timeline-item">
+      <div class="timeline-icon"></div>
+      <div class="timeline-content">
+        <h3 class="role">Freelance Developer</h3>
+        <p class="company">Self-Employed</p>
+        <p class="description">Delivered websites and applications for small businesses and startups, focusing on fast, user-friendly, scalable solutions, And most Important Fast builds.</p>
+        <span class="date">2025 - Present</span>
       </div>
+    </div>
+
+
+      
     </div>
   </section>
 
@@ -382,32 +400,77 @@
 
  
     <!-- CONTACT -->
-    <section id="contact" class="page container">
-      <h2>Contact Me</h2>
-      <div class="contact-grid">
-        <form id="contactForm" class="contact-card card">
-          <h3>Send a message</h3>
-          <label><span>Name</span><input type="text" name="name" required placeholder="Your name" /></label>
-          <label><span>Email</span><input type="email" name="email" required placeholder="you@example.com" /></label>
-          <label><span>Message</span><textarea name="message" rows="5" required placeholder="Brief message..."></textarea></label>
-          <div class="form-actions"><button type="submit" class="btn primary">Send</button><button type="reset" class="btn ghost">Reset</button></div>
-          <p class="muted small">Or reach me on <a href="#" aria-label="GitHub">GitHub</a> • <a href="#" aria-label="LinkedIn">LinkedIn</a>.</p>
-        </form>
+<!-- CONTACT (replace existing contact section) -->
+<section id="contact" class="page container contact-section" aria-labelledby="contact-heading">
+  <div class="contact-wrap">
+    
+    <h2 id="contact-heading" class="contact-title">Contact Me <span class="emoji">📬</span></h2>
+    
+    <div class="contact-grid card-row">
+      <form id="contactForm" class="contact-card card" aria-label="Contact form">
+        
+        <h3>Send a message <span class="emoji">✉️</span></h3>
 
-        <aside class="contact-info card">
-          <h3>Get in touch</h3>
-          <p>Email: <a href="mailto:muskan@example.com">muskan@example.com</a></p>
-          <p>Open to remote internships, freelance projects, and collaborations.</p>
-          <div class="contact-quick"><a class="btn outline" href="/resume.pdf" download>Download Resume</a></div>
-        </aside>
-      </div>
-    </section>
+        <label class="field">
+          <span class="field-label">Name</span>
+          <input type="text" name="name" required placeholder="Your name" autocomplete="name" />
+        </label>
 
-  </main>
+        <label class="field">
+          <span class="field-label">Email</span>
+          <input type="email" name="email" required placeholder="you@example.com" autocomplete="email" />
+        </label>
+
+        <label class="field">
+          <span class="field-label">Message</span>
+          <textarea name="message" rows="5" required placeholder="Brief message..."></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary send-btn" aria-live="polite">
+            <span class="btn-emoji" aria-hidden="true">🚀</span>
+            <span class="btn-text">Send</span>
+          </button>
+
+          <button type="reset" class="btn ghost reset-btn">
+            <span class="btn-emoji" aria-hidden="true">♻️</span>
+            Reset
+          </button>
+        </div>
+
+        <p class="muted small contact-hint">Or reach me on <a href="#" aria-label="GitHub">GitHub</a> • <a href="#" aria-label="LinkedIn">LinkedIn</a>.</p>
+      </form>
+
+      <aside class="contact-info card contact-aside" aria-labelledby="contact-aside-heading">
+        <h3 id="contact-aside-heading">Get in touch <span class="emoji">💬</span></h3>
+        <p>Email: <a href="mailto:shrivastavamuskan05@gmail.com">shrivastavamuskan05@gmail.com</a></p>
+        <p class="muted">Open to remote internships, freelance projects, and collaborations.</p>
+
+        <div class="aside-actions">
+          <a class="btn outline resume-btn" href="/resume.pdf" download>
+            <span class="emoji">📄</span> Download Resume
+          </a>
+
+          <div class="quick-badges" aria-hidden="true">
+            <span class="badge">⚡ Fast replies</span>
+            <span class="badge">🌎 Remote-friendly</span>
+            <span class="badge">🤝 Collab-ready</span>
+          </div>
+        </div>
+
+        <div id="contactSuccess" class="contact-success" role="status" aria-live="polite" hidden>
+          <span class="success-emoji">✅</span>
+          <strong>Message sent!</strong> Thanks — I’ll reply soon.
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 
   <footer class="footer">
     <div class="container">
-      <p>© <span id="year"></span> Muskan Shrivastava — Built with ❤️</p>
+      <p>© <span id="year"></span> Muskan Shrivastava — Built with ❤️ and lots of ☕</p>
       <nav>
         <a href="#home">Home</a>
         <a href="#projects">Projects</a>

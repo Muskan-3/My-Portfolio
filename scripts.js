@@ -223,3 +223,122 @@ new PerformanceObserver(list => {
     if (entry.duration > 40) console.warn('Long frame:', entry.duration, entry);
   }
 }).observe({type: 'frame', buffered: true});
+
+// Timeline: draw line + reveal connectors/cards one-by-one
+(function timelineConnectorReveal() {
+  const timeline = document.querySelector('.timeline');
+  if (!timeline) return;
+
+  const items = Array.from(timeline.querySelectorAll('.timeline-item'));
+  if (!items.length) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // IntersectionObserver to reveal each item with stagger
+  const io = new IntersectionObserver((entries, obs) => {
+    entries
+      .filter(e => e.isIntersecting)
+      .sort((a, b) => items.indexOf(a.target) - items.indexOf(b.target))
+      .forEach(entry => {
+        const el = entry.target;
+        const idx = items.indexOf(el);
+        const baseDelay = 20;
+        const delay = prefersReduced ? 0 : Math.min(180 + idx * baseDelay, 900);
+
+        // set CSS var for connector transition delay
+        el.style.setProperty('--delay', `${delay}ms`);
+
+        if (prefersReduced) {
+          el.classList.add('visible');
+          obs.unobserve(el);
+        } else {
+          setTimeout(() => {
+            el.classList.add('visible');
+            obs.unobserve(el);
+          }, delay);
+        }
+      });
+  }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+
+  items.forEach(i => io.observe(i));
+
+  // draw the main line once the first item is visible
+  const firstObserver = new IntersectionObserver((entries, fo) => {
+    if (entries.some(e => e.isIntersecting)) {
+      if (prefersReduced) {
+        timeline.classList.add('drawn');
+      } else {
+        setTimeout(() => timeline.classList.add('drawn'), 100);
+      }
+      fo.disconnect();
+    }
+  }, { threshold: 0.01 });
+
+  firstObserver.observe(items[0]);
+})();
+
+// contact
+// ------------------ Contact micro-interactions ------------------
+(function contactEnhancements(){
+  const form = document.getElementById('contactForm');
+  const sendBtn = form?.querySelector('.send-btn');
+  const sendEmoji = sendBtn?.querySelector('.btn-emoji');
+  const successBox = document.getElementById('contactSuccess');
+
+  // playful hover nudge for send emoji
+  if (sendBtn && sendEmoji) {
+    sendBtn.addEventListener('mouseenter', () => { sendEmoji.style.transform = 'translateY(-3px) rotate(-6deg)'; });
+    sendBtn.addEventListener('mouseleave', () => { sendEmoji.style.transform = ''; });
+  }
+
+  // fake send & success animation (replace with real submit when needed)
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // disable & animate
+      if (sendBtn) {
+        sendBtn.disabled = true;
+        sendBtn.classList.add('sending');
+        sendBtn.querySelector('.btn-text').textContent = 'Sending...';
+      }
+
+      // simulate network
+      setTimeout(() => {
+        // show success box
+        if (successBox) {
+          successBox.hidden = false;
+          successBox.classList.add('success-pulse');
+          // brief role/readout for screen readers
+          successBox.setAttribute('aria-hidden', 'false');
+        }
+
+        // feel-good emoji flourish
+        if (sendEmoji) {
+          sendEmoji.animate([{ transform: 'translateY(0) rotate(0) scale(1)' }, { transform: 'translateY(-18px) rotate(-16deg) scale(1.18)' }, { transform: 'translateY(0) rotate(0) scale(1)' }], { duration: 750, easing: 'cubic-bezier(.2,.9,.2,1)' });
+        }
+
+        // reset UI & form
+        form.reset();
+        if (sendBtn) {
+          sendBtn.disabled = false;
+          sendBtn.classList.remove('sending');
+          sendBtn.querySelector('.btn-text').textContent = 'Send';
+        }
+
+        // remove pulse after animation
+        setTimeout(() => { successBox?.classList.remove('success-pulse'); }, 900);
+      }, 900);
+    });
+  }
+
+  // reveal aside when in view (works with existing scroll reveal)
+  const aside = document.querySelector('.contact-aside');
+  if (aside && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(ent => {
+        if (ent.isIntersecting) aside.classList.add('revealed');
+      });
+    }, { threshold: 0.2 });
+    obs.observe(aside);
+  }
+})();

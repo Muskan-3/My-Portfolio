@@ -40,7 +40,11 @@ body{
   scroll-behavior: smooth;
   padding-top: 0;      /* header is fixed; sections use scroll-margin-top */
 }
-
+/* Ensure all main content layers above the background orb & particles */
+header, section, footer {
+  position: relative;
+  z-index: 1;
+}
 /* Utility container */
 .container{ max-width: var(--container); margin: 0 auto; padding: 2rem; }
 
@@ -230,6 +234,15 @@ section { scroll-margin-top: calc(var(--header-height) + 8px); }
 .type-cursor{ display:inline-block; margin-left:6px; opacity:0.85; transform: translateY(2px); font-weight:700; }
 
 /* Orb & particles (decorative) */
+/* Wrapper for orb + particles */
+.hero-bg {
+  position: fixed;     /* stays in place while scrolling */
+  inset: 0;            /* cover whole screen */
+  z-index: 0;          /* behind everything */
+  pointer-events: none;/* doesn’t block clicks */
+}
+
+/* keep your existing orb + particle styles */
 .hero-bg-orb {
   position: absolute;
   right: 6vw;
@@ -244,6 +257,7 @@ section { scroll-margin-top: calc(var(--header-height) + 8px); }
   pointer-events: none;
   z-index: 0;
 }
+
 .particle-canvas {
   position: absolute;
   left: 0;
@@ -255,6 +269,7 @@ section { scroll-margin-top: calc(var(--header-height) + 8px); }
   opacity: 0.7;
   pointer-events: none;
 }
+
 /* adding laptop */
 /* Laptop / window mockup */
 .laptop-window {

@@ -8,7 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dark">
   <header class="topbar">
@@ -28,67 +29,89 @@
   <main id="mainSnap" class="snap-container">
 
     <!-- HERO -->
-    <section id="home" class="page page-hero" aria-label="Home">
-      <div class="hero-bg">
-        <!-- floating SVG clouds (decorative) -->
-        <svg class="cloud cloud-1" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M20 40c0-9 7-16 16-16 4 0 8 2 10 5 4-4 10-6 16-6 12 0 22 9 22 20H20z" />
-        </svg>
-        <svg class="cloud cloud-2" viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M30 50c0-11 9-20 20-20 5 0 10 3 13 7 6-6 16-8 24-8 18 0 34 14 34 32H30z" />
-        </svg>
-        <svg class="cloud cloud-3" viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M30 50c0-11 9-20 20-20 5 0 10 3 13 7 6-6 16-8 24-8 18 0 34 14 34 32H30z" />
-        </svg>
+  <section id="home" class="page-hero">
+    <div class="hero-bg">
+      <!-- glowing orb -->
+      <div id="heroOrb" class="hero-bg-orb"></div>
+      <!-- particles -->
+      <canvas id="particleCanvas" class="particle-canvas"></canvas>
+    </div>
 
-        <!-- SVG laptop wrapper (you added this earlier) -->
-        <div class="svg-laptop-wrapper">
-          <!-- simplified SVG laptop (screen with animated bars) -->
-          <svg viewBox="0 0 600 360" class="svg-laptop" role="img" aria-label="Laptop illustration">
-            <rect x="20" y="20" width="560" height="240" rx="12" fill="#071022"/>
-            <!-- code lines as rects to animate (optional visual) -->
-            <g class="code-lines" transform="translate(42,38)">
-              <rect class="line l1" x="0" y="0" width="420" height="12" rx="6"/>
-              <rect class="line l2" x="0" y="26" width="360" height="10" rx="6"/>
-              <rect class="line l3" x="0" y="48" width="300" height="10" rx="6"/>
-              <rect class="line l4" x="0" y="70" width="440" height="10" rx="6"/>
-            </g>
-          </svg>
+   <div class="hero-center container">
+  <div class="hero-text">
+    <h1 class="hero-catch">
+      Crafting beautiful web experiences — <br>
+      <span class="highlight">
+        <span id="typedText"></span>
+        <span class="type-cursor">▌</span>
+      </span>
+    </h1>
 
-          <!-- --- Option A: laptop typing overlay (placed over the SVG screen) --- -->
-          <div class="laptop-screen-overlay" aria-hidden="false">
-            <pre id="laptopCode" class="laptop-code" aria-live="polite" aria-atomic="true"></pre>
-          </div>
-        </div>
+    <p class="hero-sub">
+      I'm Muskan Shrivastava — Full Stack Developer • Freelance • Open for internships
+    </p>
+
+    <div class="hero-cta">
+      <a href="#contact" class="btn primary cta-animate">Let’s Build Together 🚀</a>
+      <a href="#about" class="btn ghost">About</a>
+    </div>
+  </div>
+
+  <!-- laptop illustration wrapper (already in your code) -->
+  <div class="hero-laptop">
+    <div class="svg-laptop-wrapper">
+      <!-- existing SVG + overlay code here -->
+    </div>
+  </div>
+</div>
+
+       <!-- Laptop window mockup -->
+<div class="laptop-window" aria-hidden="true">
+  <div class="window-top">
+    <div class="window-controls" role="presentation" aria-hidden="true">
+      <span class="control red"></span>
+      <span class="control yellow"></span>
+      <span class="control green"></span>
+    </div>
+
+    <!-- small in-window navbar / title area -->
+    <div class="window-nav">
+      <span class="win-brand">portfolio.js</span>
+      <nav class="win-links" aria-hidden="true">
+        <span>Home</span>
+        <span>About</span>
+        <span>Projects</span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="window-body">
+    <!-- Line numbers (optional) -->
+    <div class="code-lines" aria-hidden="true">
+      <pre>
+01
+02
+03
+04
+05
+06
+07
+08
+      </pre>
+    </div>
+
+    <!-- Code area — this is where your typing script uses #laptopCode -->
+    <div class="code-wrap">
+      <pre id="laptopCode" class="code"></pre>
+    </div>
+  </div>
+</div>
 
 
-        <!-- glowing orb (parallax) -->
-        <div id="heroOrb" class="hero-bg-orb" aria-hidden="true"></div>
-
-        <!-- subtle particles -->
-        <canvas id="particleCanvas" class="particle-canvas" aria-hidden="true"></canvas>
-      </div>
-
-      <div class="hero-center container">
-        <h1 class="hero-catch">
-          Crafting beautiful web experiences —
-          <span class="highlight">
-            <span id="typedText">
-              
-            </span>
-            <span class="type-cursor">▌</span>
-          </span>
-        </h1>
-
-        <p class="hero-sub">I'm Muskan Shrivastava — Full Stack Developer • Freelance • Open for internships</p>
-
-        <div class="hero-cta">
-          <a href="#contact" class="btn primary cta-animate">Let’s Build Together 🚀</a>
-          <a href="#about" class="btn ghost">About</a>
-        </div>
-      </div>
+    </div>
   </section>
 
+   
 <!-- ABOUT -->
 <section id="about" class="page page-about container">
   <div class="about-grid">

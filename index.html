@@ -7,10 +7,13 @@
   <meta name="description" content="Portfolio of Muskan Shrivastava — Full Stack Developer (1 year freelancing). Open for internships." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="dark">
   <header class="topbar">
     <a class="logo" href="#home">Muskan Shrivastava</a>
+
     <nav class="nav">
       <a href="#home" data-target="home">Home</a>
       <a href="#about" data-target="about">About</a>
@@ -22,165 +25,339 @@
     </nav>
   </header>
 
-  <!-- main container with scroll-snap -->
   <main id="mainSnap" class="snap-container">
 
-    <!-- HOME (first page) -->
-    <section id="home" class="page page-hero">
-      <div class="hero-center">
-        <h1 class="hero-catch">Crafting beautiful web experiences — <span class="typed">Fast. Accessible. Scalable.</span></h1>
-        <p class="hero-sub">I’m Muskan Shrivastava — Full Stack Developer • Freelance • Open for internships</p>
+    <!-- HERO -->
+    <section id="home" class="page page-hero" aria-label="Home">
+      <div class="hero-bg">
+        <!-- floating SVG clouds (decorative) -->
+        <svg class="cloud cloud-1" viewBox="0 0 200 60" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M20 40c0-9 7-16 16-16 4 0 8 2 10 5 4-4 10-6 16-6 12 0 22 9 22 20H20z" />
+        </svg>
+        <svg class="cloud cloud-2" viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M30 50c0-11 9-20 20-20 5 0 10 3 13 7 6-6 16-8 24-8 18 0 34 14 34 32H30z" />
+        </svg>
+        <svg class="cloud cloud-3" viewBox="0 0 220 70" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M30 50c0-11 9-20 20-20 5 0 10 3 13 7 6-6 16-8 24-8 18 0 34 14 34 32H30z" />
+        </svg>
+
+        <!-- SVG laptop wrapper (you added this earlier) -->
+        <div class="svg-laptop-wrapper">
+          <!-- simplified SVG laptop (screen with animated bars) -->
+          <svg viewBox="0 0 600 360" class="svg-laptop" role="img" aria-label="Laptop illustration">
+            <rect x="20" y="20" width="560" height="240" rx="12" fill="#071022"/>
+            <!-- code lines as rects to animate (optional visual) -->
+            <g class="code-lines" transform="translate(42,38)">
+              <rect class="line l1" x="0" y="0" width="420" height="12" rx="6"/>
+              <rect class="line l2" x="0" y="26" width="360" height="10" rx="6"/>
+              <rect class="line l3" x="0" y="48" width="300" height="10" rx="6"/>
+              <rect class="line l4" x="0" y="70" width="440" height="10" rx="6"/>
+            </g>
+          </svg>
+
+          <!-- --- Option A: laptop typing overlay (placed over the SVG screen) --- -->
+          <div class="laptop-screen-overlay" aria-hidden="false">
+            <pre id="laptopCode" class="laptop-code" aria-live="polite" aria-atomic="true"></pre>
+          </div>
+        </div>
+
+
+        <!-- glowing orb (parallax) -->
+        <div id="heroOrb" class="hero-bg-orb" aria-hidden="true"></div>
+
+        <!-- subtle particles -->
+        <canvas id="particleCanvas" class="particle-canvas" aria-hidden="true"></canvas>
+      </div>
+
+      <div class="hero-center container">
+        <h1 class="hero-catch">
+          Crafting beautiful web experiences —
+          <span class="highlight">
+            <span id="typedText">
+              
+            </span>
+            <span class="type-cursor">▌</span>
+          </span>
+        </h1>
+
+        <p class="hero-sub">I'm Muskan Shrivastava — Full Stack Developer • Freelance • Open for internships</p>
+
         <div class="hero-cta">
-          <a href="#contact" class="btn primary">Hire Me</a>
+          <a href="#contact" class="btn primary cta-animate">Let’s Build Together 🚀</a>
           <a href="#about" class="btn ghost">About</a>
         </div>
       </div>
-      <div class="hero-bg-orb" aria-hidden="true"></div>
-    </section>
+  </section>
 
-    <!-- ABOUT (second page) -->
-    <section id="about" class="page page-about container">
-      <div class="about-grid">
-        <div class="about-left">
-          <h2>About Me</h2>
-          <p>I’m a Full Stack Developer with 1 year of freelancing experience. I enjoy building performant frontends and scalable backends and I'm actively seeking internship opportunities to learn and contribute within a team. I specialize in React, Node.js, and modern UI/UX.</p>
+<!-- ABOUT -->
+<section id="about" class="page page-about container">
+  <div class="about-grid">
+    <div class="about-left">
+      <h2>About Me</h2>
 
-          <ul class="about-list">
-            <li><strong>Experience:</strong> 1 year — Freelance projects</li>
-            <li><strong>Availability:</strong> Open for internships & freelancing</li>
-            <li><strong>Location:</strong> (Your city) — Remote friendly</li>
-          </ul>
+      <p class="lead">
+        I’m <strong>Muskan Shrivastava</strong>, a web developer currently pursuing a
+        <strong>B.Tech in Information Technology (Cloud specialization)</strong> at Alliance University.
+        I love turning ideas into fast, user-friendly websites — beautiful frontends and cloud-ready backends.
+      </p>
 
-          <div class="about-actions">
-            <a class="btn outline" href="/resume.pdf" download>Download Resume</a>
-            <a class="btn ghost" href="#contact">Contact</a>
-          </div>
-        </div>
+      <p>
+        Outside of code, I design visuals with <strong>Canva</strong> and run digital ads to help projects reach users.
+        I’m detail-oriented, hardworking, and constantly learning to build better web experiences.
+      </p>
 
-        <div class="about-right">
-         <div class="oval-photo">
-  <img
-    src="photo/Muskan-Microsoft-Image-480.jpg"
-    srcset="photo/Muskan-Microsoft-Image-320.jpg 320w,
-            photo/Muskan-Microsoft-Image-480.jpg 480w,
-            photo/Muskan-Microsoft-Image-800.jpg 800w"
-    sizes="(max-width: 768px) 280px, 360px"
-    alt="Muskan Shrivastava — portrait"
-    loading="lazy"
-  />
-</div>
-        </div>
+      <p>
+        I take on <strong>freelance projects</strong> and I’m open to <strong>internships, collaborations</strong>, and new opportunities.
+      </p>
+
+
+      <div class="about-actions social-links">
+        <a href="tel:+919065562136" class="btn outline call-btn" aria-label="Call Muskan">
+          <span class="material-symbols-outlined">call</span>
+          Call
+        </a>
+
+        <a href="https://github.com/Muskan-3" target="_blank" rel="noopener" class="btn outline github-btn" aria-label="GitHub">
+          <span class="material-symbols-outlined">code</span>
+          GitHub
+        </a>
+
+        <a href="https://www.linkedin.com/in/muskan-shrivastava-75b9a2250/" target="_blank" rel="noopener" class="btn outline linkedin-btn" aria-label="LinkedIn">
+          <span class="material-symbols-outlined">business_center</span>
+          LinkedIn
+        </a>
       </div>
-    </section>
+    </div>
 
-    <!-- SKILLS -->
-    <section id="skills" class="page container">
-      <h2>Skills</h2>
-      <p class="muted">Card-style skill set grouped by category.</p>
-      <div class="skills-grid">
-        <article class="skill-card card" data-category="frontend">
-          <div class="card-head">
-            <h3>Frontend</h3><small>UI & UX</small>
-          </div>
-          <ul class="skill-list">
-            <li>React</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Tailwind</li>
-          </ul>
-        </article>
-
-        <article class="skill-card card" data-category="backend">
-          <div class="card-head">
-            <h3>Backend</h3><small>Server & APIs</small>
-          </div>
-          <ul class="skill-list">
-            <li>Node.js</li><li>Express.js</li>
-          </ul>
-        </article>
-
-        <article class="skill-card card" data-category="database">
-          <div class="card-head">
-            <h3>Database</h3><small>Storage</small>
-          </div>
-          <ul class="skill-list">
-            <li>MongoDB</li><li>SQL</li>
-          </ul>
-        </article>
-
-        <article class="skill-card card" data-category="tools">
-          <div class="card-head">
-            <h3>Tools / Other</h3><small>Workflow</small>
-          </div>
-          <ul class="skill-list">
-            <li>Git</li><li>GitHub</li><li>VS Code</li><li>Postman</li>
-          </ul>
-        </article>
+    <div class="about-right">
+      <div class="oval-photo">
+        <img
+          src="photo/Muskan-Microsoft-Image-480.jpg"
+          srcset="photo/Muskan-Microsoft-Image-320.jpg 320w,
+                  photo/Muskan-Microsoft-Image-480.jpg 480w,
+                  photo/Muskan-Microsoft-Image-800.jpg 800w"
+          sizes="(max-width: 768px) 280px, 360px"
+          alt="Muskan Shrivastava — portrait"
+          loading="lazy"
+        />
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+<!-- Skills Section -->
+ <section id="skills" class="skills-section" aria-labelledby="skills-heading">
+    <div class="container">
+      
+<section id="skills" class="page skills-section">
+  <div class="container">
+    <h2 class="skills-title">Skills & Technologies</h2>
 
-    <!-- PROJECTS -->
-    <section id="projects" class="page container">
-      <div class="section-head">
-        <div>
-          <h2>Projects</h2>
-          <p class="muted">Highlighted projects — click to view repo or live demo.</p>
-        </div>
-        <div class="filters">
-          <button class="chip active" data-filter="all">All</button>
-          <button class="chip" data-filter="frontend">Frontend</button>
-          <button class="chip" data-filter="backend">Backend</button>
-          <button class="chip" data-filter="fullstack">Full Stack</button>
-        </div>
+    <div class="skills-grid">
+      <!-- Skill Card -->
+      <div class="skill-card" data-skill="frontend" data-value="90">
+        <div class="skill-icon"><i class="fas fa-globe"></i></div>
+        <h3>Frontend Development</h3>
+        <p>HTML5, CSS3, JavaScript</p>
+        <div class="progress"><span class="progress-fill"></span></div>
       </div>
 
-      <div id="projectsGrid" class="projects-grid">
-        <article class="project-card card" data-type="fullstack">
-          <div class="project-media placeholder">Screenshot</div>
-          <div class="project-body">
-            <h3>Project One</h3>
-            <p class="muted">A full stack task manager app with authentication and real-time updates.</p>
-            <div class="project-tags"><span>React</span><span>Node</span><span>MongoDB</span></div>
-            <div class="project-actions"><a href="#" class="btn small">Live</a><a href="#" class="btn small ghost">GitHub</a></div>
-          </div>
-        </article>
-
-        <article class="project-card card" data-type="frontend">
-          <div class="project-media placeholder">Screenshot</div>
-          <div class="project-body">
-            <h3>Project Two</h3>
-            <p class="muted">Interactive UI library and design system for dashboards.</p>
-            <div class="project-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
-            <div class="project-actions"><a href="#" class="btn small">Live</a><a href="#" class="btn small ghost">GitHub</a></div>
-          </div>
-        </article>
-
-        <article class="project-card card" data-type="backend">
-          <div class="project-media placeholder">Screenshot</div>
-          <div class="project-body">
-            <h3>Project Three</h3>
-            <p class="muted">REST API for an e-commerce prototype with secure payment integration stub.</p>
-            <div class="project-tags"><span>Node</span><span>Express</span><span>Postgres</span></div>
-            <div class="project-actions"><a href="#" class="btn small">Docs</a><a href="#" class="btn small ghost">GitHub</a></div>
-          </div>
-        </article>
+      <div class="skill-card" data-skill="backend" data-value="85">
+        <div class="skill-icon"><i class="fas fa-cogs"></i></div>
+        <h3>Backend Development</h3>
+        <p>Node.js, Python, Express, API & Communication</p>
+        <div class="progress"><span class="progress-fill"></span></div>
       </div>
-    </section>
+
+      <div class="skill-card" data-skill="database" data-value="75">
+        <div class="skill-icon"><i class="fas fa-database"></i></div>
+        <h3>Database</h3>
+        <p>MySQL, NoSQL</p>
+        <div class="progress"><span class="progress-fill"></span></div>
+      </div>
+
+      <div class="skill-card" data-skill="devops" data-value="70">
+        <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+        <h3>Cloud & DevOps</h3>
+        <p>AWS, Azure, Google Cloud</p>
+        <div class="progress"><span class="progress-fill"></span></div>
+      </div>
+        <div class="skill-card" data-skill="devops" data-value="70">
+        <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+        <h3>Cloud & DevOps</h3>
+        <p>AWS, Azure, Google Cloud</p>
+        <div class="progress"><span class="progress-fill"></span></div>
+      </div>
+        <div class="skill-card" data-skill="devops" data-value="70">
+        <div class="skill-icon"><i class="fas fa-cloud"></i></div>
+        <h3>Cloud & DevOps</h3>
+        <p>AWS, Azure, Google Cloud</p>
+        <div class="progress"><span class="progress-fill"></span></div>
+      </div>
+      </div>
+
+ <!-- Projects Section -->
+<section id="projects" class="page projects-section" aria-labelledby="projects-heading">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <h2 id="projects-heading">Featured Projects</h2>
+        <p class="muted">Highlighted projects — click to view repo or live demo.</p>
+      </div>
+    </div>
+
+    <div id="projectsGrid" class="projects-grid">
+
+      <!-- Project 1 -->
+      <article class="project-card" data-type="fullstack" tabindex="0" aria-labelledby="proj-1-title">
+        <div class="project-media" aria-hidden="true">
+          <img src="photo/kvs.png" alt="KVS Kabbadi Academy preview" loading="lazy">
+        </div>
+        <div class="project-body">
+          <h3 id="proj-1-title">KVS Kabbadi Academy</h3>
+          <p class="muted">A full stack website with authentication and real-time updates.</p>
+          <div class="project-tags" aria-hidden="true">
+            <span>React</span>
+            <span>Node</span>
+            <span>MongoDB</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://www.kvsacademy.org/" class="btn small" target="_blank" rel="noopener noreferrer">Live</a>
+            <a href="https://github.com/utsav-18/Kabaddi-Academy" class="btn small ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="project-card" data-type="frontend" tabindex="0" aria-labelledby="proj-2-title">
+        <div class="project-media" aria-hidden="true">
+          <img src="photo/Zorko.png" alt="Zorko preview" loading="lazy">
+        </div>
+        <div class="project-body">
+          <h3 id="proj-2-title">Zorko</h3>
+          <p class="muted">Interactive UI library and design system for dashboards.</p>
+          <div class="project-tags" aria-hidden="true">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JS</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://zorkofranchise.in/" class="btn small" target="_blank" rel="noopener noreferrer">Live</a>
+            <a href="https://github.com/Muskan-3/Zorko" class="btn small ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="project-card" data-type="backend" tabindex="0" aria-labelledby="proj-3-title">
+        <div class="project-media" aria-hidden="true">
+          <img src="photo/Guruji pjt.png" alt="Astrotalk API preview" loading="lazy">
+        </div>
+        <div class="project-body">
+          <h3 id="proj-3-title">Astrotalk Website</h3>
+          <p class="muted">REST API for an e-commerce prototype with secure payment integration stub.</p>
+          <div class="project-tags" aria-hidden="true">
+            <span>Node</span>
+            <span>Express</span>
+            <span>Postgres</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://astrotalk-7mjg.onrender.com/" class="btn small" target="_blank" rel="noopener noreferrer">Live</a>
+            <a href="https://github.com/Manish01137/astrotalk" class="btn small ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 4 -->
+      <article class="project-card" data-type="backend" tabindex="0" aria-labelledby="proj-4-title">
+        <div class="project-media" aria-hidden="true">
+          <img src="photo/mintmedia.png" alt="Mint-Media preview" loading="lazy">
+        </div>
+        <div class="project-body">
+          <h3 id="proj-4-title">Mint-Media</h3>
+          <p class="muted">REST API for an e-commerce prototype with secure payment integration stub.</p>
+          <div class="project-tags" aria-hidden="true">
+            <span>Node</span>
+            <span>Express</span>
+            <span>Postgres</span>
+          </div>
+          <div class="project-actions">
+            <a href="https://mindmintmedia.in" class="btn small" target="_blank" rel="noopener noreferrer">Live</a>
+            <a href="https://github.com/Manish01137/mind-mint-media" class="btn small ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Project 5 -->
+      <article class="project-card" data-type="backend" tabindex="0" aria-labelledby="proj-5-title">
+        <div class="project-media" aria-hidden="true">
+          <img src="photo/Amazon.png" alt="Amazon Clone preview" loading="lazy">
+        </div>
+        <div class="project-body">
+          <h3 id="proj-5-title">Amazon-Clone</h3>
+          <p class="muted">REST API for an e-commerce prototype with secure payment integration stub.</p>
+          <div class="project-tags" aria-hidden="true">
+            <span>Node</span>
+            <span>Express</span>
+            <span>Postgres</span>
+          </div>
+          <div class="project-actions">
+            <a href="#" class="btn small" aria-disabled="true">Live</a>
+            <a href="https://github.com/Muskan-3/Amazon-Clone" class="btn small ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+        </div>
+      </article>
+
+    </div> <!-- /projects-grid -->
+  </div> <!-- /container -->
+</section>
+
 
     <!-- EXPERIENCE -->
-    <section id="experience" class="page container">
-      <h2>Experience</h2>
-      <div class="experience-list">
-        <div class="exp-item card">
-          <h3>Freelance Web Developer</h3>
-          <p class="muted">Self-employed — Various clients</p>
-          <p>Worked on multiple full stack projects including dashboards, small SAAS prototypes, landing pages and APIs. Hands-on experience across React, Node.js, and MongoDB. Total experience: <strong>1 year</strong>.</p>
-        </div>
-
-        <div class="exp-item card">
-          <h3>Internship — (Placeholder)</h3>
-          <p class="muted">Open for internships — ready to add more real-world team experience.</p>
+    <section class="experience-section">
+    <h2 class="section-title">Experience</h2>
+    <p class="section-subtitle">My professional journey</p>
+    
+    <div class="timeline">
+      <!-- Senior Full Stack Developer -->
+      <div class="timeline-item">
+        <div class="timeline-icon"></div>
+        <div class="timeline-content">
+          <h3 class="role">Senior Full Stack Developer</h3>
+          <p class="company">Tech Innovation Labs</p>
+          <p class="description">Leading development of enterprise applications, mentoring junior developers, and architecting scalable solutions</p>
+          <span class="date">2022 - Present</span>
         </div>
       </div>
-    </section>
 
+      <!-- Full Stack Developer -->
+      <div class="timeline-item">
+        <div class="timeline-icon"></div>
+        <div class="timeline-content">
+          <h3 class="role">Full Stack Developer</h3>
+          <p class="company">Digital Solutions Inc</p>
+          <p class="description">Built responsive web applications, implemented RESTful APIs, and optimized database performance</p>
+          <span class="date">2020 - 2022</span>
+        </div>
+      </div>
+
+      <!-- Frontend Developer -->
+      <div class="timeline-item">
+        <div class="timeline-icon"></div>
+        <div class="timeline-content">
+          <h3 class="role">Frontend Developer</h3>
+          <p class="company">Creative Web Studio</p>
+          <p class="description">Developed pixel-perfect UI components, collaborated with designers, and improved site performance</p>
+          <span class="date">2019 - 2020</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+ 
     <!-- CONTACT -->
     <section id="contact" class="page container">
       <h2>Contact Me</h2>
@@ -216,6 +393,7 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- NOTE: use the same script filename you already have; below I use scripts.js -->
+  <script src="scripts.js"></script>
 </body>
 </html>

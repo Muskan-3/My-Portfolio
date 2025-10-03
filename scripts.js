@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!typedEl) return;
 
     const snippets = [
-`// Hello 👋
+`// Hello 👋 Welcome To My Portfolio 😊
 const dev = "Muskan Shrivastava";
 const role = "Full Stack Developer";`,
 `// Skills

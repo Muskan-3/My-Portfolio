@@ -60,6 +60,230 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+//  cursor // 
+// Spark cursor (self-contained). Paste into scripts.js or load after DOM content.
+(function () {
+  if (typeof window === 'undefined') return;
+
+  // Respect reduced-motion
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return; // don't create particles or custom cursor
+
+  const canvas = document.getElementById('spark-canvas');
+  const cursorWrap = document.getElementById('spark-cursor-wrap');
+  const dot = document.getElementById('spark-cursor-dot');
+  const ring = document.getElementById('spark-cursor-ring');
+  if (!canvas || !cursorWrap || !dot || !ring) return;
+
+  // Setup canvas
+  const ctx = canvas.getContext('2d');
+  let W = 0, H = 0;
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  // Particle pool
+  const MAX_PARTICLES = 90;
+  const particles = [];
+  for (let i = 0; i < MAX_PARTICLES; i++) {
+    particles.push({
+      alive: false,
+      x: 0, y: 0,
+      vx: 0, vy: 0,
+      life: 0, ttl: 0,
+      size: 0,
+      hue: 0,
+      alpha: 0
+    });
+  }
+
+  let px = window.innerWidth / 2, py = window.innerHeight / 2; // actual mouse
+  let smx = px, smy = py; // smoothed coordinates
+  const SMOOTH = 0.18; // smoothing factor
+
+  let lastMove = performance.now();
+  let spawnCooldown = 0;
+
+  function spawnParticle(x, y, speedScale = 1, palette = null) {
+    // find dead particle
+    for (let p of particles) {
+      if (!p.alive) {
+        p.alive = true;
+        p.x = x + (Math.random() - 0.5) * 6;
+        p.y = y + (Math.random() - 0.5) * 6;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = (Math.random() * 1.6 + 0.6) * speedScale;
+        p.vx = Math.cos(angle) * speed;
+        p.vy = Math.sin(angle) * speed - (Math.random() * 0.8);
+        p.ttl = 420 + Math.random() * 480; // lifespan (ms)
+        p.life = 0;
+        p.size = 1 + Math.random() * 3.6;
+      p.hue = 170 + Math.random() * 10;
+     
+       // tight turquoise range
+// tight turquoise range
+ // varied Hue
+        p.alpha = 0.95;
+        return;
+      }
+    }
+    // if pool exhausted, recycle the oldest
+    let oldest = particles.reduce((a,b) => (a.life/a.ttl > b.life/b.ttl ? a : b));
+    oldest.x = x; oldest.y = y; oldest.vx = (Math.random()-0.5)*2; oldest.vy = -Math.random()*1.2;
+    oldest.life = 0; oldest.ttl = 400 + Math.random()*300; oldest.alive = true; oldest.size = 2; oldest.hue = 200;
+  }
+
+  // spawn a cluster for movement
+  function spawnTrail(x, y, vxFactor=1) {
+    const count = 1 + Math.floor(Math.random() * 3);
+    for (let i=0;i<count;i++) spawnParticle(x, y, 0.6 * vxFactor);
+  }
+
+  // spawn burst for click
+  function spawnBurst(x, y) {
+    const count = 10 + Math.floor(Math.random() * 10);
+    for (let i=0;i<count;i++) spawnParticle(x, y, 1.6);
+  }
+
+  // pointer handling
+  let usingPointer = false;
+  function onPointerMove(e) {
+    usingPointer = true;
+    px = e.clientX;
+    py = e.clientY;
+    const now = performance.now();
+    const dt = now - lastMove;
+    lastMove = now;
+
+    // spawn trail with cooldown to limit density
+    spawnCooldown = Math.max(0, spawnCooldown - dt);
+    if (spawnCooldown <= 0) {
+      spawnTrail(px, py, Math.min(2, Math.max(0.5, dt / 12)));
+      spawnCooldown = 10; // ms
+    }
+  }
+
+  function onPointerDown(e) {
+    px = e.clientX; py = e.clientY;
+    cursorWrap.classList.add('clicking');
+    spawnBurst(px, py);
+    // remove clicking state after short delay
+    setTimeout(() => cursorWrap.classList.remove('clicking'), 140);
+  }
+
+  // support both mouse and touch pointer events gracefully
+  window.addEventListener('mousemove', onPointerMove, { passive: true });
+  window.addEventListener('pointermove', onPointerMove, { passive: true }); // extra safety
+  window.addEventListener('mousedown', onPointerDown, { passive: true });
+  window.addEventListener('pointerdown', onPointerDown, { passive: true });
+
+  // touch: translate last touch to pointer (but we hide the custom cursor on touch due to CSS)
+  window.addEventListener('touchstart', (ev) => {
+    if (!ev.touches || !ev.touches[0]) return;
+    const t = ev.touches[0];
+    px = t.clientX; py = t.clientY;
+    spawnBurst(px, py);
+  }, { passive: true });
+
+  // animation loop
+  let lastTS = performance.now();
+  function tick(ts) {
+    const dt = ts - lastTS;
+    lastTS = ts;
+
+    // smooth cursor position
+    smx += (px - smx) * SMOOTH;
+    smy += (py - smy) * SMOOTH;
+
+    // position DOM cursor elements
+    cursorWrap.style.transform = `translate3d(${Math.round(smx)}px, ${Math.round(smy)}px, 0)`;
+
+    // tiny ring wobble based on velocity
+    const vx = px - smx, vy = py - smy;
+    const speed = Math.min(50, Math.sqrt(vx*vx + vy*vy));
+    const ringScale = 1 + Math.min(0.32, speed / 160);
+    ring.style.transform = `translate(-50%,-50%) scale(${ringScale})`;
+
+    // clear and draw particles
+    ctx.clearRect(0,0,W,H);
+    for (let p of particles) {
+      if (!p.alive) continue;
+      // physics
+      p.vx *= 0.995;
+      p.vy += 0.02; // gravity-like
+      p.x += p.vx * (dt / 16);
+      p.y += p.vy * (dt / 16);
+
+      p.life += dt;
+      const lifeRatio = p.life / p.ttl;
+
+      // fade out
+      p.alpha = Math.max(0, 0.95 * (1 - lifeRatio));
+
+      // size easing
+      const size = p.size * (1 - lifeRatio * 0.8);
+
+      // draw (glowing spark)
+      ctx.beginPath();
+      // radial gradient for soft spark
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, Math.max(1, size*6));
+      const hue = Math.floor(p.hue);
+      g.addColorStop(0, `hsla(${hue}, 100%, 65%, ${Math.min(1, p.alpha)})`);
+      g.addColorStop(0.3, `hsla(${hue}, 95%, 55%, ${Math.min(0.6, p.alpha*0.75)})`);
+      g.addColorStop(1, `hsla(${hue}, 70%, 45%, 0)`);
+      ctx.fillStyle = g;
+      ctx.fillRect(p.x - size*6, p.y - size*6, size*12, size*12);
+
+      // small bright core
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.fillStyle = `rgba(255,255,255, ${p.alpha * 0.5})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, Math.max(0.5, size/1.7), 0, Math.PI*2);
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+
+      // kill if expired or off-screen
+      if (p.life >= p.ttl || p.x < -40 || p.x > W + 40 || p.y < -40 || p.y > H + 40) {
+        p.alive = false;
+      }
+    }
+
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // hide cursor if mouse leaves window (keeps things tidy)
+  window.addEventListener('mouseout', (e) => {
+    if (!e.relatedTarget && !e.toElement) {
+      // hide offscreen
+      cursorWrap.style.opacity = '0';
+      canvas.style.opacity = '0';
+    }
+  });
+  window.addEventListener('mouseover', () => {
+    cursorWrap.style.opacity = '1';
+    canvas.style.opacity = '1';
+  });
+
+  // Accessibility: when keyboard-focus used, we may want to hide the custom cursor to avoid distraction
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab') {
+      cursorWrap.style.opacity = '0';
+      canvas.style.opacity = '0';
+    }
+  });
+  window.addEventListener('mousedown', () => {
+    // ensure visible on mouse interactions
+    cursorWrap.style.opacity = '1';
+    canvas.style.opacity = '1';
+  });
+
+})();
 
   // Reduced motion
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;

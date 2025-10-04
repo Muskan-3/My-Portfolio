@@ -424,50 +424,84 @@ section { scroll-margin-top: calc(var(--header-height) + 8px); }
 /* -------------------------
    About section
    ------------------------- */
+/* ==========================================
+   Section Heading — "Skills And Technology"
+   (Gradient + Animated Underline)
+   ========================================== */
 
-/* Reusable section heading with centered underline */
-.section-heading {
+.Heading-By-Me {
   position: relative;
-  display: inline-block;         /* shrink to text width so underline centers nicely */
-  font-size: 2.6rem;             /* adjust size as needed */
-  line-height: 1;
+  display: inline-block;
+  font-size: 2.8rem;
   font-weight: 800;
-  color: #ffffff;                /* heading color */
+  color: #ffffff;
   letter-spacing: -0.5px;
-  margin: 0 0 1.25rem 0;
-  padding-bottom: 0.6rem;        /* space for underline */
-  text-align: center;
+  margin-bottom: 1.8rem;
+  line-height: 1.2;
+  text-transform: capitalize;
   -webkit-font-smoothing: antialiased;
+  background: linear-gradient(90deg, #00F5A0 0%, #22D3EE 45%, #7C3AED 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-/* The underline bar */
-.section-heading .section-underline {
-  display: block;
+/* Animated underline */
+.Heading-By-Me::after {
+  content: "";
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -6px;                  /* distance below text */
-  width: 72px;                   /* underline length */
-  height: 6px;                   /* underline thickness */
+  left: 0;
+  bottom: -8px; /* distance below text */
+  height: 5px;
+  width: 0;
   border-radius: 6px;
   background: linear-gradient(90deg, #00F5A0 0%, #22D3EE 45%, #7C3AED 100%);
-  box-shadow: 0 6px 18px rgba(124,58,237,0.12);
-  pointer-events: none;
-  opacity: 1;
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.25);
+  transition: width 0.6s ease-in-out;
 }
 
-/* Smaller screens: scale down the heading and underline */
-@media (max-width: 760px) {
-  .section-heading {
-    font-size: 1.8rem;
-    padding-bottom: 0.5rem;
+/* Animate underline on hover or scroll */
+.section-heading:hover::after,
+.Heading-By-Me:hover::after,
+.section-heading.animate::after,
+.Heading-By-Me.animate::after {
+  width: 120px; /* adjust length as you like */
+}
+
+/* Responsive tweaks */
+@media (max-width:900px){
+  .section-heading, .Heading-By-Me { font-size: clamp(1.6rem, 3.6vw, 2.2rem); }
+  .section-heading::after, .Heading-By-Me::after { bottom: -6px; height: 4px; }
+}
+
+/* =============================
+   Responsive adjustments
+   ============================= */
+@media (max-width: 900px) {
+  .Heading-By-Me {
+    font-size: 2.2rem;
   }
-  .section-heading .section-underline {
-    width: 56px;
-    height: 5px;
-    bottom: -5px;
+  .Heading-By-Me::after {
+    bottom: -6px;
+    height: 4px;
   }
 }
+
+@media (max-width: 500px) {
+  .Heading-By-Me {
+    font-size: 1.7rem;
+  }
+  .Heading-By-Me::after {
+    width: 0;
+    height: 3px;
+    bottom: -5px;
+  }
+  .Heading-By-Me:hover::after,
+  .Heading-By-Me.animate::after {
+    width: 90px;
+  }
+}
+
 
 .page-about{ align-items: center; width: 100%; }
 .about-grid{ display: grid; grid-template-columns: 1fr 420px; gap: 2rem; align-items: center; width: 100%; max-width: var(--container); margin: 0 auto; }
@@ -1059,3 +1093,374 @@ margin-bottom: 70px;
    ------------------------- */
 .footer{ padding:1.2rem 0; background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); border-top: 1px solid rgba(255,255,255,0.02);display: flex; }
 .footer nav a{ margin-left:1rem; color: var(--muted); text-decoration: none; }
+
+
+/* ------------------------
+   Mobile responsiveness additions
+   (append to the end of styles.css)
+   ------------------------ */
+
+/* Global smaller type + reduced gaps on small screens */
+@media (max-width: 900px) {
+  :root {
+    --container: 940px;
+  }
+
+  /* Make header more compact */
+  .topbar {
+    padding: 0.5rem 1rem;
+    height: 56px;
+  }
+  .logo { font-size: 1.12rem; }
+
+  /* Allow nav items to wrap and become horizontally scrollable if necessary */
+  .nav {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* hide firefox scrollbar */
+  }
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav a {
+    margin-left: 0.6rem;
+    padding: 6px 8px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  /* reduce hero laptop slightly */
+  .hero-center { gap: 1rem; max-width: 760px; }
+  .laptop-window { width: 380px; }
+}
+
+/* Stack hero content: heading stays on top, laptop goes below on small screens.
+   This preserves desktop (no change) and only changes layout below 760px. */
+@media (max-width: 760px) {
+  .hero-center {
+    flex-direction: column-reverse; /* laptop below headings */
+    align-items: center;
+    text-align: center;
+    padding: 0 0.5rem;
+  }
+
+  .hero-text { width: 100%; }
+  .hero-catch { font-size: clamp(1.6rem, 6vw, 2.4rem); margin-bottom: 0.5rem; }
+  .hero-sub { margin: 0.5rem 0 1rem; font-size: 0.98rem; }
+
+  /* Make laptop use full available width but keep its visual look */
+  .laptop-window {
+    width: 92%;
+    max-width: 420px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    transform: none !important; /* avoid desktop hover transform causing overflow */
+  }
+
+  /* center the tiny in-window nav items and hide non-essential pieces */
+  .window-nav { margin-left: 8px; font-size: 11px; }
+  .window-nav .win-links { display: none; } /* keeps the topbar compact on tiny screens */
+
+  /* tweak hero orb so it doesn't push content on tiny screens */
+  .hero-bg-orb { right: 2vw; top: 20vh; width: min(36vh, 360px); height: min(36vh, 360px); opacity: 0.12; }
+}
+
+/* Tight mobile / phones (<=480px) */
+@media (max-width: 480px) {
+  :root { --header-height: 56px; }
+
+  /* Topbar: logo left, nav stays scrollable but shrinks */
+  .topbar { padding: 0.5rem 0.8rem; height: 52px; }
+  .logo { font-size: 1rem; margin-right: 6px; }
+
+  .nav a { font-size: 0.88rem; padding: 6px; margin-left: 0.4rem; }
+
+  /* Hero: more compact spacing */
+  .page-hero { padding: 1.25rem 0.75rem; }
+  .hero-center { gap: 0.8rem; }
+
+  /* laptop becomes visually smaller and fits inside container */
+  .laptop-window {
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+  }
+  .laptop-window .window-body { padding: 12px; gap: 10px; }
+  .laptop-window .code-wrap { min-height: 120px; max-height: 240px; padding: 8px; }
+  .laptop-window .code-lines { display: none; } /* reclaim space */
+
+  /* About section: single column, smaller photo */
+  .about-grid { grid-template-columns: 1fr; gap: 1.25rem; align-items: center; padding: 0 0.6rem; }
+  .about-right { display: flex; justify-content: center; align-items: center; }
+  .oval-photo { width: 280px; height: 280px; padding: 12px; }
+
+  /* Skills: comfortable padding on phones */
+  .skills-grid { padding: 12px; margin-top: 30px; margin-bottom: 60px; }
+  .skill-card { padding: 18px; border-radius: 20px; height: auto; min-height: 200px; }
+
+  /* Projects: single column + smaller gaps */
+  .projects-grid { grid-template-columns: 1fr; gap: 18px; padding: 24px; border-radius: 24px; }
+
+  /* Timeline: remove left offset and use compact stacking */
+  .experience-section { padding: 1.5rem 1rem; margin-left: 0; }
+  .timeline { padding-left: 20px; }
+  .timeline::before { left: 14px; width: 6px; }
+  .timeline-item::before { left: 14px; width: 12px; }
+  .timeline-content { margin-left: 44px; padding: 14px; }
+
+  /* Contact grid: stack form and aside */
+  .card-row { grid-template-columns: 1fr; gap: 18px; padding: 0 0.6rem; }
+  .card { width: 100%; max-width: 100%; padding: 18px; border-radius: 14px; }
+  .contact-aside { order: 2; }
+
+  /* Footer spacing */
+  .footer { padding: 0.9rem 0.75rem; }
+  .footer nav a { margin-left: 0.6rem; font-size: 0.9rem; }
+}
+
+/* Small touch-ups for very narrow screens */
+@media (max-width: 360px) {
+  .hero-catch { font-size: 1.4rem; }
+  .hero-sub { font-size: 0.95rem; }
+  .about-left .lead, .about-left p { font-size: 0.96rem; }
+  .btn { padding: 8px 10px; font-size: 0.92rem; }
+}
+
+/* Accessibility: ensure focus rings are visible on small devices */
+@media (max-width: 760px) {
+  .nav a:focus-visible, .btn:focus-visible { outline-offset: 2px; }
+}
+
+/* End of mobile additions */
+/* ================================
+   About Section — refined responsiveness
+   ================================ */
+
+/* Medium screens (tablets, ~1000px and below) */
+@media (max-width: 1000px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+    justify-items: center;
+    padding: 0 2rem;
+    text-align: center;
+  }
+
+  .about-left {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .about-left .lead,
+  .about-left p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .about-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .oval-photo {
+    width: 320px;
+    height: auto;
+    border-radius: 50%;
+    padding: 10px;
+  }
+}
+
+/* Small screens (phones, <=700px) */
+@media (max-width: 700px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0 1.2rem;
+  }
+
+  .about-left {
+    text-align: center;
+   
+  }
+
+  .about-left .lead,
+  .about-left p {
+    font-size: 0.97rem;
+    line-height: 1.55;
+    color: #eaf2ff;
+  }
+
+  .oval-photo {
+    width: 260px;
+    height: auto;
+    border-radius: 50%;
+    padding: 8px;
+  }
+
+  .about-left .btn {
+    margin: 0.4rem 0.25rem;
+  }
+}
+
+/* Extra-small phones (<=480px) */
+@media (max-width: 480px) {
+  .about-grid {
+    padding: 0 0.8rem;
+    gap: 1.25rem;
+  }
+
+  .about-left .lead,
+  .about-left p {
+    font-size: 0.95rem;
+  }
+
+  .oval-photo {
+    width: 220px;
+  }
+}
+/* -------------------------
+/* -----------------------------
+   Responsive: reduce project card height on narrow screens
+   Paste at the end of styles.css
+   ----------------------------- */
+
+/* Generic card elements used by many project sections.
+   If your project cards use different class names, add them to the selector list. */
+#projects .project-card,
+#projects .card,
+.projects-grid .project,
+.project-card,
+.project-item,
+.card.project,
+.project-tile {
+  box-sizing: border-box;
+  transition: all 220ms ease;
+}
+
+/* Reduce image/thumbnail area and body padding for medium screens */
+@media (max-width: 900px) {
+  /* shrink the visual preview / screenshot */
+  .project-card .project-image,
+  .project-card .proj-thumb,
+  .project-card .card-media,
+  .project-item img,
+  .card .project-image {
+    max-height: 320px;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  /* tighten interior spacing */
+  .project-card .card-body,
+  .project-card .project-content,
+  .project-card .card-meta {
+    padding: 14px 16px;
+    gap: 8px;
+  }
+
+  /* limit the total card height so cards look compact */
+  .project-card {
+    max-height: 760px; /* medium reduction */
+    overflow: hidden;
+  }
+
+  /* make titles wrap faster and use smaller size */
+  .project-card .project-title,
+  .project-card .card-title {
+    font-size: clamp(1.05rem, 2.3vw, 1.25rem);
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-card .project-description,
+  .project-card .card-desc {
+    font-size: clamp(0.9rem, 1.9vw, 1rem);
+    line-height: 1.45;
+    margin-bottom: 0.8rem;
+  }
+}
+
+/* Tighter for phones: aggressively reduce heights/padding */
+@media (max-width: 600px) {
+  .project-card .project-image,
+  .project-card .proj-thumb,
+  .project-card .card-media,
+  .project-item img,
+  .card .project-image {
+    max-height: 220px;
+  }
+
+  .project-card .card-body,
+  .project-card .project-content,
+  .project-card .card-meta {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .project-card {
+    max-height: 520px; /* smaller, so multiple cards stack compactly */
+  }
+
+  /* shorten long descriptions visually */
+  .project-card .project-description,
+  .project-card .card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 4; /* show up to 4 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* reduce CTA/button sizes inside cards */
+  .project-card .btn,
+  .project-card .card-cta,
+  .project-card .project-actions a {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+    min-width: 0;
+  }
+}
+
+/* Very narrow phones (<=380px) */
+@media (max-width: 380px) {
+  .project-card .project-image,
+  .project-card .proj-thumb,
+  .project-card .card-media,
+  .project-item img,
+  .card .project-image {
+    max-height: 180px;
+  }
+
+  .project-card {
+    max-height: 460px;
+  }
+
+  .project-card .project-title {
+    font-size: 1rem;
+  }
+
+  .project-card .project-description {
+    -webkit-line-clamp: 3;
+  }
+}
+
+/* Optional: if your cards use an inner preview with a fixed aspect,
+   this will preserve aspect ratio but scale it down smoothly. */
+.project-card .media-figure,
+.project-card .preview-frame {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16; /* narrow mobile preview; remove or change if undesired */
+  object-fit: cover;
+}
+
+/* Final safeguard: avoid accidental huge heights from margins/pseudo-elements */
+.project-card, .project-card * {
+  margin-right: 0 !important;
+  transform: none !important;
+}

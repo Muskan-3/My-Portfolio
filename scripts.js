@@ -368,3 +368,18 @@ if (window.PerformanceObserver) {
     }
   }).observe({type: 'frame', buffered: true});
 }
+  
+// Animate underline when heading enters viewport
+const heading = document.querySelector('.Heading-By-Me');
+if (heading) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        heading.classList.add('animate');
+        observer.unobserve(heading); // only trigger once
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(heading);
+}

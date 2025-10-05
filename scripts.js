@@ -585,14 +585,7 @@ const stack = ["React","Node","MongoDB","HTML","CSS","JS"];`
 }); // end DOMContentLoaded
 
 // small performance observer for dev
-if (window.PerformanceObserver) {
-  new PerformanceObserver(list => {
-    for (const entry of list.getEntries()) {
-      if (entry.duration > 40) console.warn('Long frame:', entry.duration, entry);
-    }
-  }).observe({type: 'frame', buffered: true});
-}
-  
+
 // Animate underline when heading enters viewport
 const heading = document.querySelector('.Heading-By-Me');
 if (heading) {
@@ -607,3 +600,4 @@ if (heading) {
 
   observer.observe(heading);
 }
+

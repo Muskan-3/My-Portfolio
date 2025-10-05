@@ -835,145 +835,6 @@ margin-bottom: 70px;
   .skills-grid { grid-template-columns: 1fr; gap: 0.9rem; padding: 0 1rem; }
   .skill-card { height: auto; min-height: 240px; max-width: 100%; }
 }
-
-
-/* -------------------------
-
-/* Project Card */
-/* Project Card - responsive version */
-.projects-grid {
-  border: 1px solid rgb(46, 215, 187);
-  border-radius: 50px;
-  display: grid;
-  gap: 50px;
-  grid-template-columns: 1fr;
-  margin-bottom: 60px;
-  padding: 50px;
-}
-
-/* columns at larger widths */
-@media (min-width: 768px) {
-  .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; padding: 40px; }
-}
-@media (min-width: 1100px) {
-  .projects-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 44px; }
-}
-
-/* card */
-.project-card {
-  border: 1px solid rgba(12, 159, 212, 0.701);
-  background: #11192e;
-  border-radius: 18px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform .3s ease, box-shadow .3s ease;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
-  min-height: 320px;
-}
-
-/* hover lift */
-.project-card:hover {
-  transform: translateY(-12px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
-}
-
-/* media area */
-.project-media {
-  height: 200px;
-  overflow: hidden;
-  border-radius: 14px 14px 0 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
-}
-.project-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .6s ease;
-}
-.project-card:hover .project-media img { transform: scale(1.08); }
-
-/* card body */
-.project-body {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  flex: 1 1 auto;
-}
-
-/* small tweaks for readable content on narrow cards */
-.project-body h3 { margin: 0 0 6px; font-size: 1.05rem; line-height: 1.2; }
-.project-body p { margin: 0; color: rgba(255,255,255,0.78); }
-
-/* ===== Responsive adjustments ===== */
-
-/* Slightly smaller cards & images on medium screens */
-@media (max-width: 1100px) {
-  .project-media { height: 180px; }
-  .project-card { min-height: 300px; }
-  .projects-grid { padding: 36px; gap: 28px; }
-}
-
-/* Tablet / large phones */
-@media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    padding: 28px;
-  }
-  .project-media {
-    height: 220px; /* slightly taller for single-column layout */
-    border-radius: 12px;
-  }
-  .project-card { min-height: auto; border-radius: 12px; }
-  .project-body { padding: 18px; gap: 12px; }
-}
-
-/* Small phones */
-@media (max-width: 520px) {
-  .projects-grid { padding: 20px; gap: 18px; border-radius: 22px; }
-  .project-media {
-    aspect-ratio: 16 / 9;
-    height: auto; /* allow aspect-ratio to control sizing */
-    border-radius: 10px;
-  }
-  .project-body { padding: 14px; gap: 10px; }
-  .project-body h3 { font-size: 1rem; }
-  .project-body p { font-size: 0.95rem; }
-}
-
-/* Very small / narrow phones */
-@media (max-width: 360px) {
-  .projects-grid { padding: 14px; gap: 14px; }
-  .project-body { padding: 12px; }
-  .project-body h3 { font-size: 0.98rem; }
-  .project-body p { font-size: 0.92rem; }
-  .project-media { border-radius: 8px; }
-}
-
-/* Accessibility: focus visible */
-.project-card:focus-visible {
-  outline: 3px solid rgba(124,58,237,0.22);
-  outline-offset: 4px;
-}
-
-/* Optional: reduce hover transform on touch devices */
-@media (hover: none) and (pointer: coarse) {
-  .project-card:hover { transform: none; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-  .project-media img { transform: none; }
-}
-
-
-/* ================================
-   Responsive Enhancements for Projects
-   ================================ */
-/* -------------------------
-   Typewriter & cycles, caret
-   ------------------------- */
-.type-cursor{ display:inline-block; margin-left:4px; opacity:1; animation: blink 1s step-end infinite; font-weight:700; }
-@keyframes blink{ 0%,100%{ opacity:1 } 50%{ opacity:0 } }
-
 /* -------------------------
    Experience / Timeline
    ------------------------- */
@@ -1509,3 +1370,295 @@ margin-bottom: 70px;
   }
 }
 /* -------------------------
+
+/* -------------------------
+
+/* Project Card */
+/* Project Card - responsive version */
+
+.projects-grid {
+  border: 1px solid rgb(46, 215, 187);
+  border-radius: 50px;
+  display: grid;
+  gap: 50px;
+  grid-template-columns: 1fr;
+  margin-bottom: 60px;
+  padding: 50px;
+}
+
+/* columns at larger widths */
+@media (min-width: 768px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; padding: 40px; }
+}
+@media (min-width: 1100px) {
+  .projects-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; padding: 44px; }
+}
+
+/* card */
+.project-card {
+  border: 1px solid rgba(12, 159, 212, 0.701);
+  background: #11192e;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s ease, box-shadow .3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+  min-height: 320px;
+}
+
+/* hover lift */
+.project-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65);
+}
+
+/* media area */
+.project-media {
+  height: 200px;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
+}
+.project-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease;
+}
+.project-card:hover .project-media img { transform: scale(1.5); }
+
+/* card body */
+.project-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 auto;
+}
+
+/* small tweaks for readable content on narrow cards */
+.project-body h3 { margin: 0 0 6px; font-size: 1rem; line-height: 1; }
+.project-body p { margin: 0; color: rgba(255,255,255,0.78); }
+
+/* ===== Responsive adjustments ===== */
+
+/* Slightly smaller cards & images on medium screens */
+@media (max-width: 1100px) {
+  .project-media { height: 230px; }
+  .project-card { min-height: 150px; }
+  .projects-grid { padding: 36px; gap: 28px; }
+}
+
+/* Tablet / large phones */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 28px;
+  }
+  .project-media {
+    height: 220px; /* slightly taller for single-column layout */
+    border-radius: 12px;
+  }
+  .project-card { min-height: auto; border-radius: 12px; }
+  .project-body { padding: 18px; gap: 12px; }
+}
+
+/* Small phones */
+@media (max-width: 520px) {
+  .projects-grid { padding: 20px; gap: 18px; border-radius: 22px; }
+  .project-media {
+    aspect-ratio: 16 / 9;
+    height: auto; /* allow aspect-ratio to control sizing */
+    border-radius: 10px;
+  }
+  .project-body { padding: 14px; gap: 10px; }
+  .project-body h3 { font-size: 1rem; }
+  .project-body p { font-size: 0.95rem; }
+}
+
+/* Very small / narrow phones */
+@media (max-width: 360px) {
+  .projects-grid { padding: 14px; gap: 19px; }
+  .project-body { padding: 12px; }
+  .project-body h3 { font-size: 0.98rem; }
+  .project-body p { font-size: 0.92rem; }
+  .project-media { border-radius: 8px; }
+}
+
+/* Accessibility: focus visible */
+.project-card:focus-visible {
+  outline: 3px solid rgba(124,58,237,0.22);
+  outline-offset: 4px;
+}
+
+/* Optional: reduce hover transform on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .project-card:hover { transform: none; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+  .project-media img { transform: none; }
+}
+/* ----------------------------
+   Projects: mobile fix & polish
+   ---------------------------- */
+
+/* Constrain the grid on small screens and center it */
+@media (max-width: 520px) {
+  .projects-grid {
+    max-width: 420px;       /* keep the grid from growing too wide on tiny phones */
+    margin: 16px auto;      /* center the grid */
+    padding: 18px 14px;     /* reduce padding so the card isn't squeezed */
+    gap: 18px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    border: 1px solid rgba(46,215,187,0.08); /* subtle border on mobile */
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+  }
+
+  /* Make each card occupy the whole available width, but limit its max width
+     so layout looks like a tidy tile instead of a hairline column */
+  .projects-grid > .project-card {
+    width: 100%;
+    max-width: 380px;   /* tweak to taste: 340–420 are common values */
+    margin: 0 auto;     /* center the card in its grid column */
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: auto;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.45);
+    transition: none;   /* avoid transform jumps on touch devices */
+  }
+
+  /* Use aspect-ratio for predictable image height and remove extreme zoom */
+  .project-media {
+    aspect-ratio: 16/9;
+    height: auto;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.02));
+  }
+  .project-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .35s ease;
+  }
+  /* Remove heavy hover zoom on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .project-media img { transform: none !important; }
+  }
+
+  /* Body content padding + readable line length */
+  .project-body {
+    padding: 12px 14px;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .project-body h3 {
+    font-size: 1.02rem;
+    line-height: 1.18;
+    margin: 0 0 6px;
+  }
+  .project-body p {
+    font-size: 0.94rem;
+    line-height: 1.4;
+    margin: 0;
+    color: rgba(230,240,255,0.92);
+  }
+
+  /* Prevent extremely long descriptions from stretching the card;
+     use a clamp with an ellipsis. (Remove .long-desc class if you want all text clamped.) */
+  .project-body p.long-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 6; /* show up to 6 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Actions: make buttons full-width & comfortably tappable */
+  .project-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .project-actions .btn {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+
+  /* Focus / accessibility */
+  .project-card:focus-visible {
+    outline: 3px solid rgba(124,58,237,0.22);
+    outline-offset: 3px;
+  }
+}
+/* ---------- fixes & small-screen safety net ---------- */
+
+/* 1) Ensure responsive viewport meta is present in <head>:
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   (If that is missing, breakpoints won't behave as expected.) */
+
+/* 2) Prevent a parent from accidentally squeezing the grid on phones.
+   This is a safe override only for small screens. */
+@media (max-width: 520px) {
+  /* make sure the project area can use the full screen width */
+  #projects, .projects-section, .projects-grid, #projectsGrid, .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box;
+  }
+}
+
+/* 3) Reduce image hover zoom to a modest amount so images don't cause layout jump */
+.project-card:hover .project-media img {
+  transform: scale(1.08);
+}
+
+/* 4) Global touch-device rule (don't rely on nested @media inside another @media) */
+@media (hover: none) and (pointer: coarse) {
+  .project-card:hover { transform: none !important; box-shadow: 0 10px 22px rgba(0,0,0,0.5) !important; }
+  .project-media img { transform: none !important; }
+}
+
+/* 5) Make sure cards don't have an enforced huge min-height on tiny screens */
+@media (max-width: 520px) {
+  .project-card { min-height: auto !important; }
+}
+
+/* 6) Optional debug helper — add class "debug-outline" to <body> to reveal constraining elements.
+   Remove this after debugging. */
+.debug-outline * { outline: 1px dashed rgba(255, 99, 71, 0.12); }
+
+/* 7) Slight readability lift for headings inside very narrow cards */
+@media (max-width: 360px) {
+  .project-body h3 { line-height: 1.16; font-size: 0.98rem; }
+  .project-body p { font-size: 0.9rem; line-height: 1.35; }
+}
+
+/* Extra tiny screens (<= 360px): reduce padding even further */
+@media (max-width: 360px) {
+  .projects-grid { max-width: 360px; padding: 12px; gap: 14px; }
+  .projects-grid > .project-card { max-width: 340px; }
+  .project-body { padding: 10px 12px; }
+  .project-body h3 { font-size: 0.98rem; }
+  .project-body p { font-size: 0.9rem; -webkit-line-clamp: 5; }
+  .project-actions .btn { padding: 10px 12px; font-size: 0.92rem; }
+}
+
+
+
+/* ================================
+   Responsive Enhancements for Projects
+   ================================ */
+/* -------------------------
+   Typewriter & cycles, caret
+ 

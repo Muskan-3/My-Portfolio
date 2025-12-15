@@ -46,20 +46,96 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Smooth scrolling for nav links
+  /* ---- Smooth scroll (professional, header-aware, reduced-motion friendly) ---- */
+(function smoothScrolling() {
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // get header offset (safe fallback)
+  function getHeaderOffset() {
+    const header = document.querySelector('.topbar') || document.querySelector('header');
+    if (!header) return 0;
+    const style = getComputedStyle(header);
+    // header may be fixed - use its height + small extra gap
+    return header.getBoundingClientRect().height + 8;
+  }
+
+  // easing function (easeInOutCubic)
+  function ease(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  // animate scroll to targetY within duration (ms)
+  function animateScrollTo(targetY, duration = 630) {
+    if (prefersReduced) {
+      window.scrollTo(0, targetY);
+      return Promise.resolve();
+    }
+    const startY = window.scrollY || window.pageYOffset;
+    const diff = targetY - startY;
+    const start = performance.now();
+
+    return new Promise(resolve => {
+      function step(now) {
+        const elapsed = now - start;
+        const t = Math.min(1, elapsed / duration);
+        const eased = ease(t);
+        window.scrollTo(0, Math.round(startY + diff * eased));
+        if (t < 1) requestAnimationFrame(step);
+        else resolve();
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  // high-level scroll-to-element (by element or selector)
+  async function scrollToElement(target, options = {}) {
+    if (!target) return;
+    const offset = options.offset != null ? options.offset : getHeaderOffset();
+    const rect = target.getBoundingClientRect();
+    const targetY = Math.max(0, window.scrollY + rect.top - offset);
+    // temporarily disable pointer events on topbar during scroll to prevent accidental hovers (optional)
+    const topbar = document.querySelector('.topbar');
+    if (topbar) topbar.style.pointerEvents = 'none';
+    await animateScrollTo(targetY, options.duration || 630);
+    if (topbar) topbar.style.pointerEvents = '';
+  }
+
+  // attach to all internal anchors (preserves your mobile nav close behavior)
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
-      // allow normal behavior for same page hash if it's a top-level anchor without target
       const href = a.getAttribute('href');
-      if (!href || href === '#') return;
+      if (!href || href === '#') return; // let normal behavior happen
       const target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        // after scroll close the nav (mobile)
-        closeNav();
-      }
+      if (!target) return;
+      e.preventDefault();
+      // close mobile nav if open (use your existing closeNav function)
+      try { if (typeof closeNav === 'function') closeNav(); } catch (err) {}
+      scrollToElement(target);
+      // update URL hash without jumping
+      history.replaceState && history.replaceState(null, '', href);
     });
   });
+
+  // If the page loads with a hash, scroll to it with offset
+  window.addEventListener('load', () => {
+    const hash = location.hash;
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        // delay slightly so layout/headers finish stabilizing
+        setTimeout(() => scrollToElement(el), 120);
+      }
+    }
+  });
+
+  // Optional: handle programmatic calls (expose a helper)
+  window.__smoothScrollTo = (selectorOrEl, opts={}) => {
+    const el = (typeof selectorOrEl === 'string') ? document.querySelector(selectorOrEl) : selectorOrEl;
+    if (el) scrollToElement(el, opts);
+  };
+
+})();
+
 //  cursor // 
 // Spark cursor (self-contained). Paste into scripts.js or load after DOM content.
 (function () {

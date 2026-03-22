@@ -11,12 +11,12 @@ This is a modern, responsive portfolio built to highlight my work in web develop
 It reflects my ability to design, develop, and deploy full-stack applications with clean UI and efficient backend logic.
 
 💡 Features
-🎨 Clean and modern UI/UX design
-📱 Fully responsive across devices
-⚡ Fast loading and optimized performance
-🧩 Modular and scalable code structure
-🌐 Live project showcase section
-📬 Contact section for collaboration
+ >Clean and modern UI/UX design
+ >Fully responsive across devices
+ >Fast loading and optimized performance
+ >Modular and scalable code structure
+ >Live project showcase section
+ >Contact section for collaboration
 
 🛠️ Tech Stack
 

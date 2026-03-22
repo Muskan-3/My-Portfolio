@@ -29,4 +29,4 @@ JavaScript
 Tools & Platforms
 
 Git & GitHub
-Render (Deployment
+Render (Deployment)
